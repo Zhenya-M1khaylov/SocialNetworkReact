@@ -1,0 +1,10 @@
+.myPostBlockContent {
+    grid-area: content;
+    background-color: aqua;
+    margin-top: 10px;
+}
+
+.myPostsBlock {
+    padding: 10px;
+    background-color: aqua;
+}
