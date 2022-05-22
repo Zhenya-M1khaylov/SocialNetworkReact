@@ -18,16 +18,14 @@ export type DialogsPagePropsType = {
     dialogs: Array<DialogsPropsType>
 }
 export type ProfilePagePropsType = {
-    postsProfilePage: Array<PostsPropsType>
+    posts: Array<PostsPropsType>
 }
 export type RootStatePropsType = {
-    state: {
         profilePage: ProfilePagePropsType
         dialogsPage: DialogsPagePropsType
-    }
 }
 
-export const state = {
+export const state: RootStatePropsType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how are you it-kamasutra?', likesCount: 12},

@@ -16,7 +16,7 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
                 <ProfileAvatar/>
             </div>
             <div>
-                <MyPosts posts={props.postsProfile.postsProfilePage} addPost={addPost}/>
+                <MyPosts posts={props.postsProfile.posts} addPost={addPost}/>
             </div>
         </div>
     );

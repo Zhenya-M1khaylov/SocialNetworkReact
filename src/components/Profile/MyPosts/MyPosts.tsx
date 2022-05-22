@@ -1,17 +1,17 @@
-import React, {MouseEventHandler} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './MyPost/Post';
-import {ProfilePagePropsType} from '../../../redux/state';
+import {PostsPropsType} from '../../../redux/state';
 
 export type MyPostsPropsType = {
-    posts: ProfilePagePropsType
+    posts: Array<PostsPropsType>
     addPost: (postMessage: string) => void
 }
 
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-    const postsElements = props.posts.postsProfilePage.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
