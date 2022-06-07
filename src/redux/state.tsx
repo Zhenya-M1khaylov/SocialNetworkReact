@@ -1,4 +1,3 @@
-
 export type MessagesPropsType = {
     id: number
     message: string
@@ -24,6 +23,26 @@ export type RootStatePropsType = {
     profilePage: ProfilePagePropsType
     dialogsPage: DialogsPagePropsType
 }
+
+type AddPostActionType = ReturnType<typeof addPostAC>
+type UpdateNewTextActionType = ReturnType<typeof onPostChangeAC>
+
+export type ActionsTypes = AddPostActionType | UpdateNewTextActionType
+
+
+export const addPostAC = (postMessage: string) => {
+    return {
+        type: 'ADD-POST',
+        postMessage: postMessage
+    } as const
+}
+export const onPostChangeAC = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    } as const
+}
+
 export type StoreType = {
     _state: RootStatePropsType
     updateNewPostsText: (newText: string) => void
@@ -31,6 +50,7 @@ export type StoreType = {
     _rerenderEntireTree: () => void
     subscribe: (callBack: () => void) => void
     getState: () => RootStatePropsType
+    dispatch: (action: ActionsTypes) => void
 }
 
 const store: StoreType = {
@@ -64,7 +84,7 @@ const store: StoreType = {
         this._state.profilePage.newPostsText = (newText)
         this._rerenderEntireTree()
     },
-    addPost (postMessage: string) {
+    addPost(postMessage: string) {
         const newPost: PostsPropsType = {
             id: new Date().getTime(),
             message: this._state.profilePage.newPostsText,
@@ -74,7 +94,7 @@ const store: StoreType = {
         this._state.profilePage.newPostsText = ''
         this._rerenderEntireTree()
     },
-    subscribe (callBack: () => void)  {
+    subscribe(callBack: () => void) {
         this._rerenderEntireTree = callBack
     },
     _rerenderEntireTree() {
@@ -82,7 +102,24 @@ const store: StoreType = {
     },
     getState() {
         return this._state
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsPropsType = {
+                id: new Date().getTime(),
+                // message: action.this._state.profilePage.newPostsText,
+                message: action.postMessage,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostsText = ''
+            this._rerenderEntireTree()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostsText = (action.newText)
+            this._rerenderEntireTree()
+        }
     }
 }
+
 
 export default store;
