@@ -12,6 +12,7 @@ export let rerenderEntireTree = () => {
              dispatch={store.dispatch.bind(store)}
              // addPost={store.addPost.bind(store)}
              newPostsText={''}
+             newMessageBody={''}
              // updateNewPostsCallBack={store.updateNewPostsText.bind(store)}
         />, document.getElementById('root')
     );

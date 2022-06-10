@@ -18,6 +18,7 @@ type AppPropsType = {
     // updateNewPostsCallBack: (newText: string) => void
     store: StoreType
     dispatch: (action: ActionsTypes) => void
+    newMessageBody: string
 }
 
 const App = (props: AppPropsType) => {
@@ -37,7 +38,8 @@ const App = (props: AppPropsType) => {
                             // updateNewPostsCallBack={props.store.updateNewPostsText.bind(props.store)}
                             newPostsText={props.store.getState().profilePage.newPostsText}
                         />}/>
-                        <Route path='/dialogs/*' element={<Dialogs  dialogsPage={state.dialogsPage} />}/>
+                        <Route path='/dialogs/*' element={<Dialogs
+                            dialogsPage={state.dialogsPage} newSendMessageText={props.store.getState().dialogsPage.newMessageBody} dispatch={props.dispatch}/>}/>
                         <Route path='/news/*' element={<News/>}/>
                         <Route path='/music/*' element={<Music/>}/>
                         <Route path='/settings/*' element={<Settings/>}/>
