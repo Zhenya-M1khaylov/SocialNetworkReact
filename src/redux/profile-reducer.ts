@@ -1,4 +1,4 @@
-import {PostsPropsType, ProfilePagePropsType} from './state';
+import {PostsPropsType, ProfilePagePropsType} from './store';
 
 export type ProfileReducerType = AddPostActionType | UpdateNewTextActionType
 
@@ -18,7 +18,16 @@ export const onPostChangeAC = (newText: string) => {
     } as const
 }
 
-export const profileReducer = (state: ProfilePagePropsType, action: ProfileReducerType) => {
+let initialState: ProfilePagePropsType = {
+    posts: [
+        {id: 1, message: 'Hi, how are you it-kamasutra?', likesCount: 12},
+        {id: 2, message: 'How are you? u are fine?', likesCount: 11}
+    ],
+    newPostsText: ''
+
+}
+
+export const profileReducer = (state= initialState, action: ProfileReducerType) => {
 
     switch (action.type) {
         case 'ADD-POST': {

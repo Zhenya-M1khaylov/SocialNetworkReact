@@ -31,7 +31,7 @@ export type RootStatePropsType = {
 export type ActionsTypes = ProfileReducerType | DialogsReducerType 
 
 
-export type StoreType = {
+ type StoreType = {
     _state: RootStatePropsType
     // updateNewPostsText: (newText: string) => void
     // addPost: (postMessage: string) => void
@@ -69,20 +69,6 @@ const store: StoreType = {
             newMessageBody: ''
         }
     },
-    // updateNewPostsText(newText: string) {
-    //     this._state.profilePage.newPostsText = (newText)
-    //     this._rerenderEntireTree()
-    // },
-    // addPost(postMessage: string) {
-    //     const newPost: PostsPropsType = {
-    //         id: new Date().getTime(),
-    //         message: this._state.profilePage.newPostsText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._state.profilePage.newPostsText = ''
-    //     this._rerenderEntireTree()
-    // },
     subscribe(callBack: () => void) {
         this._rerenderEntireTree = callBack
     },
@@ -97,28 +83,6 @@ const store: StoreType = {
         this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileReducerType)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action as DialogsReducerType)
         this._rerenderEntireTree()
-
-        // if (action.type === 'ADD-POST') {
-        //     const newPost: PostsPropsType = {
-        //         id: new Date().getTime(),
-        //         // message: action.this._state.profilePage.newPostsText,
-        //         message: action.postMessage,
-        //         likesCount: 0
-        //     }
-        //     this._state.profilePage.posts.push(newPost)
-        //     this._state.profilePage.newPostsText = ''
-        //     this._rerenderEntireTree()
-        // } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-        //     this._state.profilePage.newPostsText = (action.newText)
-        //     this._rerenderEntireTree()
-        // } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-        //     this._state.dialogsPage.newMessageBody = action.newBody
-        //     this._rerenderEntireTree
-        // } else if (action.type === 'SEND-MESSAGE') {
-        //     let body = this._state.dialogsPage.newMessageBody
-        //     this._state.dialogsPage.messages.push( {id: 6, message: body})
-        //     this._rerenderEntireTree
-        // }
     }
 }
 

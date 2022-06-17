@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import {newMessageBodyAC, sendMessageAC} from '../../redux/dialogs-reducer';
-import {ActionsTypes, DialogsPagePropsType} from '../../redux/state';
+import {ActionsTypes, DialogsPagePropsType} from '../../redux/store';
 
 export type PropsType = {
     dialogsPage: DialogsPagePropsType
@@ -46,7 +46,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
                         </textarea>
                     </div>
                     <div>
-                        <button onClick={onSendMessageClick}></button>
+                        <button onClick={onSendMessageClick} className={s.buttonSendMessageDialog}>Send</button>
                     </div>
                 </div>
             </div>

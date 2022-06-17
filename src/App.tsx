@@ -8,21 +8,24 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
-import state, {ActionsTypes, RootStatePropsType, StoreType} from './redux/state';
+import {Dispatch, Store} from 'redux'
 
 type AppPropsType = {
     // state: RootStatePropsType
 
     // addPost: (postMessage: string) => void
-    newPostsText: string
-    // updateNewPostsCallBack: (newText: string) => void
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
-    newMessageBody: string
+    //  newPostsText: string
+    // // updateNewPostsCallBack: (newText: string) => void
+    // store: string
+    //  dispatch: (action: ActionsTypes) => void
+    //  newMessageBody: string
+    store: Store
+    dispatch: Dispatch
 }
 
-const App = (props: AppPropsType) => {
+const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState()
+    console.log(state)
     return (
         <BrowserRouter>
             <div className='appWrapper'>
