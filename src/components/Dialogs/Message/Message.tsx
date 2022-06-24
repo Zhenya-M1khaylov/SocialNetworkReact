@@ -1,12 +1,12 @@
 import React from 'react';
 import s from './../Dialogs.module.css'
 
-type PropsType = {
+type MessagePropsType = {
     message: string
     id: number // ?
 }
 
-const Message: React.FC<PropsType> = (props) => {
+const Message: React.FC<MessagePropsType> = (props) => {
 
     const newMessageElement = React.createRef<HTMLTextAreaElement>()
     const addMessage = () => {

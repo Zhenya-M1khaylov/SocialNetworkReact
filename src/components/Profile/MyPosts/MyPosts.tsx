@@ -2,14 +2,15 @@ import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import Post from './MyPost/Post';
 import {addPostAC, onPostChangeAC} from '../../../redux/profile-reducer';
-import {ActionsTypes, PostsPropsType} from '../../../redux/store';
+import {PostsPropsType} from '../../../redux/store';
+import {Dispatch} from 'redux';
 
 export type MyPostsPropsType = {
     posts: Array<PostsPropsType>
-    // addPost: (postMessage: string) => void
+    addPost: (postMessage: string) => void
     newPostsText: string
-    // updateNewPostsCallBack: (newText: string) => void
-    dispatch: (action: ActionsTypes) => void
+    updateNewPostsCallBack: (newText: string) => void
+    dispatch: Dispatch
 }
 
 
@@ -18,15 +19,16 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
 
-    const addPost = () => {
-        // props.addPost(props.newPostsText)
+    const onAddPost = () => {
+        props.addPost(props.newPostsText)
         // props.dispatch({type: 'ADD-POST', postMessage: props.newPostsText})
-        props.dispatch(addPostAC(props.newPostsText))
+        // props.dispatch(addPostAC(props.newPostsText))
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.updateNewPostsCallBack(e.currentTarget.value)
-        props.dispatch(onPostChangeAC(e.currentTarget.value))
+        props.updateNewPostsCallBack(e.currentTarget.value)
+
+        // props.dispatch(onPostChangeAC(e.currentTarget.value))
     }
 
     return (
@@ -36,9 +38,11 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             </div>
             <div>
                 <div><textarea value={props.newPostsText}
-                               onChange={onPostChange}/></div>
+                               onChange={onPostChange}
+                />
+                </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.myPostBlockContent}>

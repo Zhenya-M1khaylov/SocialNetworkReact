@@ -28,12 +28,12 @@ export type RootStatePropsType = {
     dialogsPage: DialogsPagePropsType
 }
 
-export type ActionsTypes = ProfileReducerType | DialogsReducerType 
+export type ActionsTypes = ProfileReducerType | DialogsReducerType
 
 
- type StoreType = {
+type StorePropsType = {
     _state: RootStatePropsType
-    // updateNewPostsText: (newText: string) => void
+    updateNewPostsText: (newText: string) => void
     // addPost: (postMessage: string) => void
     _rerenderEntireTree: () => void
     subscribe: (callBack: () => void) => void
@@ -41,7 +41,7 @@ export type ActionsTypes = ProfileReducerType | DialogsReducerType
     dispatch: (action: ActionsTypes) => void
 }
 
-const store: StoreType = {
+const store: StorePropsType = {
     _state: {
         profilePage: {
             posts: [
@@ -77,6 +77,10 @@ const store: StoreType = {
     },
     getState() {
         return this._state
+    },
+    updateNewPostsText(newText: string) {
+        this._state.profilePage.newPostsText = (newText)
+        this._rerenderEntireTree()
     },
     dispatch(action) {
 

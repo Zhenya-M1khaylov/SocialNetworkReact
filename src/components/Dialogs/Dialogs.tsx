@@ -3,30 +3,29 @@ import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import {newMessageBodyAC, sendMessageAC} from '../../redux/dialogs-reducer';
-import {ActionsTypes, DialogsPagePropsType} from '../../redux/store';
+import {DialogsPagePropsType} from '../../redux/store';
 
-export type PropsType = {
+export type DialogsPropsType = {
     dialogsPage: DialogsPagePropsType
-    dispatch: (action: ActionsTypes) => void
-    newSendMessageText: string
-
+    sendMessageCallback: () => void
+    newMessageBody: (body: string) => void // ?????????????
 }
 
-const Dialogs: React.FC<PropsType> = (props) => {
+const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let state = props.dialogsPage
 
     const dialogsElement = state.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
     const messagesElement = state.messages.map(m => <Message id={m.id} message={m.message}/>)
-    const newMessageBody = state.newMessageBody
+    const newMessageBodyText = state.newMessageBody
 
-    const onSendMessageClick = () => {
-        props.dispatch(sendMessageAC(props.newSendMessageText))
-    }
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
+    const onUpdateNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        // let body = e.currentTarget.value
         // props.store.dispatch()
-        props.dispatch(newMessageBodyAC(body))
+        // props.dispatch(newMessageBodyAC(body))
+
+        let body = e.currentTarget.value
+        props.newMessageBody(body)
     }
 
     return (
@@ -39,14 +38,14 @@ const Dialogs: React.FC<PropsType> = (props) => {
                 <div>
                     <div>
                         <textarea
-                            value={newMessageBody}
+                            value={newMessageBodyText}
                             placeholder='Enter your message'
-                            onChange={onNewMessageChange}
+                            onChange={onUpdateNewMessageChange}
                         >
                         </textarea>
                     </div>
                     <div>
-                        <button onClick={onSendMessageClick} className={s.buttonSendMessageDialog}>Send</button>
+                        <button onClick={props.sendMessageCallback} className={s.buttonSendMessageDialog}>Send</button>
                     </div>
                 </div>
             </div>
