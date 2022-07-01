@@ -31,7 +31,7 @@ export type RootStatePropsType = {
 export type ActionsTypes = ProfileReducerType | DialogsReducerType
 
 
-type StorePropsType = {
+export type StorePropsType = {
     _state: RootStatePropsType
     updateNewPostsText: (newText: string) => void
     // addPost: (postMessage: string) => void
@@ -87,7 +87,7 @@ const store: StorePropsType = {
         this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileReducerType)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action as DialogsReducerType)
         this._rerenderEntireTree()
-    }
+    },
 }
 
 

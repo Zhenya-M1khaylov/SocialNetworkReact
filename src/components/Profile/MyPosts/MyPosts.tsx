@@ -10,7 +10,7 @@ export type MyPostsPropsType = {
     addPost: (postMessage: string) => void
     newPostsText: string
     updateNewPostsCallBack: (newText: string) => void
-    dispatch: Dispatch
+    // dispatch: Dispatch
 }
 
 

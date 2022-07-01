@@ -17,16 +17,13 @@ type AppPropsType = {
     // addPost: (postMessage: string) => void
     // newPostsText: string
     // updateNewPostsCallBack: (newText: string) => void
-    // store: string
-    //  dispatch: (action: ActionsTypes) => void
     //  newMessageBody: string
-    store: Store
-    dispatch: Dispatch
+    // store: Store
+    // dispatch: Dispatch
 }
 
 const App: React.FC<AppPropsType> = (props) => {
-    const state = props.store.getState()
-    console.log(state)
+    // const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className='appWrapper'>
@@ -35,8 +32,9 @@ const App: React.FC<AppPropsType> = (props) => {
                 <div className='appWrapperContent'>
                     <Routes>
                         <Route path='/profile/*' element={<Profile
-                            dispatch={props.dispatch}
-                            store={store}
+                            // dispatch={props.dispatch}
+                            // store={store}
+
                             // dispatch={props.store.dispatch.bind(props.store)}
                             // postsProfile={state.profilePage}
                             // addPostCallBack={props.addPost.bind(props.store)}
@@ -50,11 +48,11 @@ const App: React.FC<AppPropsType> = (props) => {
                         {/*    dispatch={props.dispatch}/>}*/}
                         {/*/>*/}
                         <Route path='/dialogs/*' element={<DialogsContainer
-                            dialogsPage={state.dialogsPage}
-                            newSendMessageText={props.store.getState().dialogsPage.newMessageBody}
+                            dialogsPage={store.getState().dialogsPage}
+                            newSendMessageText={store.getState().dialogsPage.newMessageBody}
 
-                            dispatch={props.dispatch}
-                            store={props.store}
+                            // dispatch={props.dispatch}
+                            // store={props.store}
                             />}
                         />
                         <Route path='/news/*' element={<News/>}/>

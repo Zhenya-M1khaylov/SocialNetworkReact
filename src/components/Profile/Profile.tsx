@@ -12,8 +12,8 @@ type ProfilePropsType = {
     // dispatch: (action: ActionsTypes) => void
     // newPostsText: string
     // updateNewPostsCallBack: (newText: string) => void
-    store: Store
-    dispatch: Dispatch
+    // store: Store
+    // dispatch: Dispatch
 }
 
 const Profile: React.FC<ProfilePropsType> = (props) => {
@@ -31,8 +31,8 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
                 {/*    newPostsText={props.newPostsText}*/}
                 {/*/>*/}
                 <MyPostsContainer
-                    store={props.store}
-                    dispatch={props.dispatch}
+                    // store={props.store}
+                    // dispatch={props.dispatch}
                     // addPost={props.addPostCallBack}
                     // updateNewPostsCallBack={props.updateNewPostsCallBack}
                 />
