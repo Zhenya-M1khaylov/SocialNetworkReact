@@ -6,7 +6,7 @@ export type NewMessageBodyActionType = ReturnType<typeof newMessageBodyAC>
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
 export const newMessageBodyAC = (newBody: string) => {
-    console.log("BODY", newBody)
+    console.log('BODY', newBody)
     return {
         type: 'UPDATE-NEW-MESSAGE-TEXT',
         newBody: newBody
@@ -39,19 +39,21 @@ let initialState: DialogsPagePropsType = {
 
 export const dialogsReducer = (state = initialState, action: DialogsReducerType) => {
 
+
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-TEXT': {
             return {
                 ...state,
                 newMessageBody: action.newBody
             }
-           // state.newMessageBody = action.newBody
-           // return state
         }
         case 'SEND-MESSAGE': {
             let body = state.newMessageBody
-            state.messages.push( {id: 6, message: body})
-            return state
+            return  {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}]
+            }
         }
         default:
             return state

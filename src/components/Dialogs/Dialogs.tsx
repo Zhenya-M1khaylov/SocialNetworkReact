@@ -2,21 +2,21 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {newMessageBodyAC, sendMessageAC} from '../../redux/dialogs-reducer';
 import {DialogsPagePropsType} from '../../redux/store';
+import {DialogsContainerType} from './DialogsContainer';
 
-export type DialogsPropsType = {
-    dialogsPage: DialogsPagePropsType
-    sendMessageCallback: () => void
-    newMessageBody: (body: string) => void // ?????????????
-}
+// export type DialogsPropsType = {
+//     dialogsPage: DialogsPagePropsType
+//     sendMessageCallback: () => void
+//     newMessageBody: (body: string) => void // ?????????????
+// }
 
-const Dialogs: React.FC<DialogsPropsType> = (props) => {
+const Dialogs: React.FC<DialogsContainerType> = (props) => {
 
     let state = props.dialogsPage
 
-    const dialogsElement = state.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
-    const messagesElement = state.messages.map(m => <Message id={m.id} message={m.message}/>)
+    const dialogsElement = state.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}/>)
+    const messagesElement = state.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)
     const newMessageBodyText = state.newMessageBody
 
     const onUpdateNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,7 +45,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
                         </textarea>
                     </div>
                     <div>
-                        <button onClick={props.sendMessageCallback} className={s.buttonSendMessageDialog}>Send</button>
+                        <button onClick={props.onSendMessageClick} className={s.buttonSendMessageDialog}>Send</button>
                     </div>
                 </div>
             </div>

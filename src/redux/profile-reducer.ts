@@ -27,26 +27,30 @@ let initialState: ProfilePagePropsType = {
 
 }
 
-export const profileReducer = (state= initialState, action: ProfileReducerType) => {
+export const profileReducer = (state = initialState, action: ProfileReducerType) => {
 
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostsPropsType = {
-                id: new Date().getTime(),
+                id: 5,
                 message: action.postMessage,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newPostsText = ''
-            return state
+           return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostsText: ''
+            }
         }
         case 'UPDATE-NEW-POST-TEXT': {
-            state.newPostsText = (action.newText)
-            return state
+            return  {
+                ...state,
+                newPostsText: action.newText
+            }
         }
         default:
             return state
-        }
+    }
 }
 
 export default profileReducer

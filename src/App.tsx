@@ -3,23 +3,18 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
 import News from './components/News/News';
-import {Dispatch, Store} from 'redux'
-import store from './redux/redux-store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import {DialogsPagePropsType} from './redux/store';
+
 
 type AppPropsType = {
     // addPost: (postMessage: string) => void
     // newPostsText: string
     // updateNewPostsCallBack: (newText: string) => void
     //  newMessageBody: string
-    // store: Store
-    // dispatch: Dispatch
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -39,7 +34,7 @@ const App: React.FC<AppPropsType> = (props) => {
                             // postsProfile={state.profilePage}
                             // addPostCallBack={props.addPost.bind(props.store)}
                             // updateNewPostsCallBack={props.store.updateNewPostsText.bind(props.store)}
-                            // newPostsText={props.store.getState().profilePage.newPostsText}
+                            // newPostsText={props.newPostsText}
                         />}
                         />
                         {/*<Route path='/dialogs/*' element={<Dialogs*/}
@@ -48,11 +43,8 @@ const App: React.FC<AppPropsType> = (props) => {
                         {/*    dispatch={props.dispatch}/>}*/}
                         {/*/>*/}
                         <Route path='/dialogs/*' element={<DialogsContainer
-                            dialogsPage={store.getState().dialogsPage}
-                            newSendMessageText={store.getState().dialogsPage.newMessageBody}
-
-                            // dispatch={props.dispatch}
-                            // store={props.store}
+                            // dialogsPage={store.getState().dialogsPage}
+                            // newSendMessageText={store.getState().dialogsPage.newMessageBody}
                             />}
                         />
                         <Route path='/news/*' element={<News/>}/>
