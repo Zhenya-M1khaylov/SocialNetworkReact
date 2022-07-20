@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, MouseEventHandler} from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
@@ -28,6 +28,10 @@ const Dialogs: React.FC<DialogsContainerType> = (props) => {
         props.newMessageBody(body)
     }
 
+    const onSendMessageClickHandler = () => {
+        props.onSendMessageClick(newMessageBodyText)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.users}>
@@ -45,7 +49,7 @@ const Dialogs: React.FC<DialogsContainerType> = (props) => {
                         </textarea>
                     </div>
                     <div>
-                        <button onClick={props.onSendMessageClick} className={s.buttonSendMessageDialog}>Send</button>
+                        <button onClick={onSendMessageClickHandler} className={s.buttonSendMessageDialog}>Send</button>
                     </div>
                 </div>
             </div>

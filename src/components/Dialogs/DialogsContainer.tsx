@@ -49,7 +49,7 @@ import {AppRootStateType} from '../../redux/redux-store';
 ///////////////
 
 export type mapStateToPropsType = {
-    dialogsPage: DialogsPagePropsType // ?????????????
+    dialogsPage: DialogsPagePropsType
 }
 
 export type mapDispatchToPropsType = {

@@ -66,7 +66,8 @@ const store: StorePropsType = {
                 {id: 4, name: 'Vanya'},
                 {id: 5, name: 'Pasha'}
             ],
-            newMessageBody: ''
+            newMessageBody: '',
+
         }
     },
     subscribe(callBack: () => void) {

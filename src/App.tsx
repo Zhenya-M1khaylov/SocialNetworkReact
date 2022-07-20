@@ -10,6 +10,7 @@ import News from './components/News/News';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
+
 type AppPropsType = {
     // addPost: (postMessage: string) => void
     // newPostsText: string
@@ -50,6 +51,7 @@ const App: React.FC<AppPropsType> = (props) => {
                         <Route path='/news/*' element={<News/>}/>
                         <Route path='/music/*' element={<Music/>}/>
                         <Route path='/settings/*' element={<Settings/>}/>
+                        {/*<Route path='/users/*' element={<UsersContainer/>}/>*/}
                     </Routes>
                 </div>
 
