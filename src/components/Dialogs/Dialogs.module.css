@@ -5,7 +5,9 @@
 
 
 .users {
-    background-color: cornflowerblue;
+    background-color: lightgrey;
+    text-align: center;
+    padding: 25px;
 }
 
 .dialogsItem {
@@ -22,7 +24,7 @@
 
 .messages {
     padding: 10px;
-    background-color: brown;
+    background-color: whitesmoke;
 }
 
 .message {

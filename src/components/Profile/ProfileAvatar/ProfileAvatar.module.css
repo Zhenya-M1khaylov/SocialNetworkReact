@@ -1,4 +1,13 @@
 .avatarDescription {
     padding: 10px;
-    background-color: cadetblue;
+    background-color: grey;
+    /*margin-bottom: 10px;*/
+}
+
+.contentImg {
+
+}
+
+.imgAvatar {
+    width: 100%;
 }

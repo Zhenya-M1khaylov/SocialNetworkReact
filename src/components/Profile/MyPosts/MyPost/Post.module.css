@@ -4,5 +4,9 @@
 }
 
 .item {
+    background-color: darkgrey;
+}
 
+.avatarPostImg {
+    background-color: darkgrey;
 }

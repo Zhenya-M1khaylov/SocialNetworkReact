@@ -1,7 +1,8 @@
 .nav {
     grid-area: nav;
-    background-color: bisque;
+    background-color: gainsboro;
     padding: 20px;
+
 }
 
 .item a {
@@ -10,5 +11,5 @@
 }
 
 .item>.activeLink  {
-    color: gold;
+    color: dimgray;
 }

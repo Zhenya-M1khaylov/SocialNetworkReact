@@ -4,11 +4,11 @@ import s from './ProfileAvatar.module.css'
 const ProfileAvatar = () => {
     return (
         <div>
-            <div className={s.content}>
-                <img src="" alt=""/>
+            <div className={s.contentImg}>
+                <img className={s.imgAvatar} src="https://cdn.mos.cms.futurecdn.net/AT9Bcvo94cTMGmESvL4JCK.jpg" alt=""/>
             </div>
             <div className={s.avatarDescription}>
-                ava+description
+                description will be hear
             </div>
         </div>
     );
