@@ -11,6 +11,7 @@ export type UsersStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type UsersReducerType = followACActionType
@@ -18,6 +19,7 @@ export type UsersReducerType = followACActionType
     | setUsersACActionType
     | setCurrentPageACActionType
     | setTotalUsersCountACActionType
+    | setIsFetchingACActionType
 
 
 export type followACActionType = ReturnType<typeof followAC>
@@ -25,6 +27,7 @@ export type unFollowACActionType = ReturnType<typeof unFollowAC>
 export type setUsersACActionType = ReturnType<typeof setUsersAC>
 export type setCurrentPageACActionType = ReturnType<typeof setCurrentPageAC>
 export type setTotalUsersCountACActionType = ReturnType<typeof setTotalUsersCountAC>
+export type setIsFetchingACActionType = ReturnType<typeof setIsFetchingAC>
 
 export const followAC = (userId: number) => {
     return {
@@ -66,52 +69,62 @@ export const setTotalUsersCountAC = (count: number) => {
         }
     } as const
 }
-
-let initialState: UsersStateType = {
-    users: [],
-    pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 1
+export const setIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'TOGGLE-IS-FETCHING',
+        payload: {
+            isFetching
+        }
+    } as const
 }
-
-export const usersReducer = (state = initialState, action: UsersReducerType): UsersStateType => {
-
-    switch (action.type) {
-        case 'FOLLOW':
-            return {
-                ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.payload.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
-            }
-        case 'UNFOLLOW':
-            return {
-                ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.payload.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
-            }
-        case 'SET-USERS':
-            return {
-                // ...state, users: [...state.users, ...action.payload.users]
-                ...state, users: action.payload.users
-            }
-        case 'SET-CURRENT-PAGE':
-            return {
-                ...state, currentPage: action.payload.currentPage
-            }
-        case 'SET-USERS-COUNT':
-            return {
-                ...state, totalUsersCount: action.payload.count
-            }
-        default:
-            return state
+    let initialState: UsersStateType = {
+        users: [],
+        pageSize: 5,
+        totalUsersCount: 0,
+        currentPage: 1,
+        isFetching: false
     }
-}
 
+    export const usersReducer = (state = initialState, action: UsersReducerType): UsersStateType => {
+
+        switch (action.type) {
+            case 'FOLLOW':
+                return {
+                    ...state,
+                    users: state.users.map(u => {
+                        if (u.id === action.payload.userId) {
+                            return {...u, followed: true}
+                        }
+                        return u
+                    })
+                }
+            case 'UNFOLLOW':
+                return {
+                    ...state,
+                    users: state.users.map(u => {
+                        if (u.id === action.payload.userId) {
+                            return {...u, followed: true}
+                        }
+                        return u
+                    })
+                }
+            case 'SET-USERS':
+                return {
+                    // ...state, users: [...state.users, ...action.payload.users]
+                    ...state, users: action.payload.users
+                }
+            case 'SET-CURRENT-PAGE':
+                return {
+                    ...state, currentPage: action.payload.currentPage
+                }
+            case 'SET-USERS-COUNT':
+                return {
+                    ...state, totalUsersCount: action.payload.count
+                }
+            case 'TOGGLE-IS-FETCHING': {
+                return {...state, isFetching: action.payload.isFetching}
+            }
+            default:
+                return state
+        }
+    }
