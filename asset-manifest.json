@@ -1,14 +1,15 @@
 {
   "files": {
     "main.css": "/SocialNetworkReact/static/css/main.f562e09a.css",
-    "main.js": "/SocialNetworkReact/static/js/main.abab7dae.js",
+    "main.js": "/SocialNetworkReact/static/js/main.72bde864.js",
     "static/media/userDefault.png": "/SocialNetworkReact/static/media/userDefault.5e39b5b446be792e0a50.png",
+    "static/media/spinner.gif": "/SocialNetworkReact/static/media/spinner.b51df3f3ec072548cb48.gif",
     "index.html": "/SocialNetworkReact/index.html",
     "main.f562e09a.css.map": "/SocialNetworkReact/static/css/main.f562e09a.css.map",
-    "main.abab7dae.js.map": "/SocialNetworkReact/static/js/main.abab7dae.js.map"
+    "main.72bde864.js.map": "/SocialNetworkReact/static/js/main.72bde864.js.map"
   },
   "entrypoints": [
     "static/css/main.f562e09a.css",
-    "static/js/main.abab7dae.js"
+    "static/js/main.72bde864.js"
   ]
 }
