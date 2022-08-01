@@ -11,7 +11,6 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 
 
-
 type AppPropsType = {
     // addPost: (postMessage: string) => void
     // newPostsText: string
@@ -47,12 +46,12 @@ const App: React.FC<AppPropsType> = (props) => {
                         <Route path='/dialogs/*' element={<DialogsContainer
                             // dialogsPage={store.getState().dialogsPage}
                             // newSendMessageText={store.getState().dialogsPage.newMessageBody}
-                            />}
+                        />}
                         />
                         <Route path='/news/*' element={<News/>}/>
                         <Route path='/music/*' element={<Music/>}/>
                         <Route path='/settings/*' element={<Settings/>}/>
-                        <Route path='/users/*' element={<UsersContainer/>}/>
+                        <Route path='/users/*' element={<UsersContainer />}/>
                     </Routes>
                 </div>
 
