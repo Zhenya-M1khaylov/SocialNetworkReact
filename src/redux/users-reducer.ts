@@ -1,9 +1,14 @@
 export type UserDataType = {
     id: number
     name: string
-    // photos: PhotosType
+    photos: PhotosType
     followed: boolean
     status: string | null
+}
+
+type PhotosType = {
+    small: string | null
+    large: string | null
 }
 
 export type UsersStateType = {

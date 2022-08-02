@@ -1,4 +1,4 @@
-import profileReducer, {ProfileReducerType} from './profile-reducer';
+import profileReducer, {ProfileReducerType, ProfileType} from './profile-reducer';
 import dialogsReducer, {DialogsReducerType} from './dialogs-reducer';
 
 export type MessagesPropsType = {
@@ -22,6 +22,8 @@ export type DialogsPagePropsType = {
 export type ProfilePagePropsType = {
     posts: Array<PostsPropsType>
     newPostsText: string
+    profile: null | ProfileType
+
 }
 export type RootStatePropsType = {
     profilePage: ProfilePagePropsType
@@ -48,7 +50,8 @@ const store: StorePropsType = {
                 {id: 1, message: 'Hi, how are you it-kamasutra?', likesCount: 12},
                 {id: 2, message: 'How are you? u are fine?', likesCount: 11}
             ],
-            newPostsText: ''
+            newPostsText: '',
+            profile: null
 
         },
         dialogsPage: {

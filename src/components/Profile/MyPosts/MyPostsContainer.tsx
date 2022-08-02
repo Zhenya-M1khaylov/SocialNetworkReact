@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostAC, onPostChangeAC} from '../../../redux/profile-reducer';
+import {addPost, onPostChange} from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 import {Dispatch} from 'redux';
 import {AppRootStateType} from '../../../redux/redux-store';
@@ -72,12 +72,12 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         updateNewPostsCallBack: (newText: string) => {
-            let action = onPostChangeAC(newText)
+            let action = onPostChange(newText)
             dispatch(action)
         },
         addPost: (newPostsText: string) => {
             // dispatch(addPostAC(state.profilePage.newPostsText))
-            dispatch(addPostAC(newPostsText))
+            dispatch(addPost(newPostsText))
         }
     } as const
 }
