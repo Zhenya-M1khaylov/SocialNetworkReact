@@ -8,8 +8,14 @@
 .item a {
     color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .item>.activeLink  {
     color: dimgray;
+
+}
+
+a.active {
+    color:gold;
 }

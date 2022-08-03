@@ -8,6 +8,12 @@
     background-color: lightgrey;
     text-align: center;
     padding: 25px;
+
+}
+
+.users a {
+    color: white;
+    text-decoration: none;
 }
 
 .dialogsItem {
