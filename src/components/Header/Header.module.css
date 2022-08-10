@@ -7,3 +7,11 @@
     width: 20px;
 }
 
+.headerBlock {
+    float: right;
+}
+
+.headerBlock a {
+    color: white;
+}
+
