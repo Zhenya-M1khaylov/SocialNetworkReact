@@ -14,6 +14,8 @@ type UsersPropsType = {
     users: Array<UserDataType>
     follow: (id: number) => void
     unfollow: (id: number) => void
+    setIsFollowing: (isFollowing: boolean, userID:number) => void
+    isFollowingInProgress:Array<number>
 }
 
 
@@ -41,26 +43,32 @@ let Users = (props: UsersPropsType) => {
                     <span>
                         <div>
                             <NavLink to={'/profile/' + u.id}>
-                            <img src={u.photos.small !== null ? u.photos.small : userDefaultPhoto}
+                            <img alt={'photo'} src={u.photos.small !== null ? u.photos.small : userDefaultPhoto}
                                  className={s.userPhoto}/>
                             </NavLink>
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                                    onClick={() => {
+                                    props.setIsFollowing(true, u.id)
                                     userAPI.unfollowUser(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.unfollow(u.id)
                                             }
+                                            props.setIsFollowing(false,u.id)
                                         })
                                 }}>UnFollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                                    onClick={() => {
+                                    props.setIsFollowing(true,u.id)
                                     userAPI.followUser(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.setIsFollowing(false,u.id)
                                         })
                                 }}>Follow</button>}
                         </div>
