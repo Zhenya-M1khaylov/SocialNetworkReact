@@ -1,4 +1,5 @@
 import {PostsPropsType} from './store';
+import {userAPI} from '../api/api';
 
 export type PostsDataType = {
     id: number
@@ -6,27 +7,27 @@ export type PostsDataType = {
     likesCount: number
 }
 type ProfileContactsType = {
-    "facebook": string | null
-    "website": string | null
-    "vk": string | null
-    "twitter": string | null
-    "instagram": string | null
-    "youtube": string | null
-    "github": string | null
-    "mainLink": string | null
+    'facebook': string | null
+    'website': string | null
+    'vk': string | null
+    'twitter': string | null
+    'instagram': string | null
+    'youtube': string | null
+    'github': string | null
+    'mainLink': string | null
 }
 type ProfilePhotoType = {
-    "small": string
-    "large": string
+    'small': string
+    'large': string
 }
 export type ProfileType = {
-    "aboutMe": string
-    "contacts": ProfileContactsType
-    "lookingForAJob": boolean
-    "lookingForAJobDescription": string
-    "fullName": string
-    "userId": number
-    "photos": ProfilePhotoType
+    'aboutMe': string
+    'contacts': ProfileContactsType
+    'lookingForAJob': boolean
+    'lookingForAJobDescription': string
+    'fullName': string
+    'userId': number
+    'photos': ProfilePhotoType
 }
 export type ProfilePageType = {
     posts: Array<PostsDataType>
@@ -57,6 +58,13 @@ export const setUserProfile = (profile: ProfileType) => {
         type: 'SET-USER-PROFILE',
         profile: profile
     } as const
+}
+
+export const getUserProfile = (userID: string) => (dispatch: any) => {
+    userAPI.getProfile(userID)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
 }
 
 

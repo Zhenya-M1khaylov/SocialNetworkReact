@@ -1,3 +1,4 @@
+import {authAPI} from '../api/api';
 
 export type AuthStateType = {
     id: null | number
@@ -37,6 +38,15 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
             login,
         }
     } as const
+}
+
+export const getAuthUserData = () => (dispatch: any) => {
+    authAPI.me().then(response => {
+            if (response.data.resultCode === 0) {
+                const {id, email, login} = response.data.data
+                dispatch(setAuthUserData(id, email, login))
+            }
+        })
 }
 
 export type AuthReducerType = setUserDataACActionType
