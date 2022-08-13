@@ -1,8 +1,9 @@
-import {combineReducers, legacy_createStore as createStore} from 'redux';
+import {applyMiddleware, combineReducers, legacy_createStore as createStore} from 'redux';
 import profileReducer from './profile-reducer';
 import dialogsReducer from './dialogs-reducer';
 import {usersReducer} from './users-reducer';
 import {authReducer} from './auth-reducer';
+import thunkMiddleware from "redux-thunk"
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,7 @@ const rootReducer = combineReducers({
 })
 
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 // export type ReduxStoreType = typeof store
 

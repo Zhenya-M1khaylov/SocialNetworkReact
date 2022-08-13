@@ -1,3 +1,5 @@
+import {userAPI} from '../api/api';
+
 export type UserDataType = {
     id: number
     name: string
@@ -29,23 +31,24 @@ export type UsersReducerType = followACActionType
     | setIsFollowingACActionType
 
 
-export type followACActionType = ReturnType<typeof follow>
-export type unFollowACActionType = ReturnType<typeof unFollow>
+export type followACActionType = ReturnType<typeof followSuccess>
+export type unFollowACActionType = ReturnType<typeof unFollowSuccess>
 export type setUsersACActionType = ReturnType<typeof setUsers>
 export type setCurrentPageACActionType = ReturnType<typeof setCurrentPage>
 export type setTotalUsersCountACActionType = ReturnType<typeof setTotalUsersCount>
 export type setIsFetchingACActionType = ReturnType<typeof setIsFetching>
 export type setIsFollowingACActionType = ReturnType<typeof setIsFollowing>
 
-export const follow = (userId: number) => {
+export const followSuccess = (userId: number) => {
     return {
         type: 'FOLLOW',
         payload: {
             userId
+
         }
     } as const
 }
-export const unFollow = (userId: number) => {
+export const unFollowSuccess = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         payload: {
@@ -79,7 +82,7 @@ export const setTotalUsersCount = (count: number) => {
 }
 export const setIsFetching = (isFetching: boolean) => {
     return {
-        type: 'TOGGLE-IS-FETCHING',
+        type: 'SET-IS-FETCHING',
         payload: {
             isFetching
         }
@@ -87,12 +90,43 @@ export const setIsFetching = (isFetching: boolean) => {
 }
 export const setIsFollowing = (isFollowing: boolean, userID: number) => {
     return {
-        type: 'TOGGLE-IS-FOLLOWING',
+        type: 'SET-IS-FOLLOWING',
         payload: {
             isFollowing,
             userID
         }
     } as const
+}
+
+export const getUsers = (currentPage:number, pageSize:number) => {
+    return (dispatch: any) => {
+        dispatch(setIsFetching(true))
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(setIsFetching(false))
+            })
+    }
+}
+
+export const follow = (id:number) => (dispatch:any) => {
+    dispatch(setIsFollowing(true,id))
+    userAPI.followUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(id))
+            }
+            dispatch(setIsFollowing(false,id))
+        })
+}
+
+export const unfollow = (id:number) => (dispatch:any) => {
+    dispatch(setIsFollowing(true, id))
+    userAPI.unfollowUser(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unFollowSuccess(id))
+            }
+            dispatch(setIsFollowing(false,id))
+        })
 }
 
 let initialState: UsersStateType = {
@@ -140,10 +174,10 @@ export const usersReducer = (state = initialState, action: UsersReducerType): Us
             return {
                 ...state, totalUsersCount: action.payload.count
             }
-        case 'TOGGLE-IS-FETCHING': {
+        case 'SET-IS-FETCHING': {
             return {...state, isFetching: action.payload.isFetching}
         }
-        case 'TOGGLE-IS-FOLLOWING': {
+        case 'SET-IS-FOLLOWING': {
             return {
                 ...state,
                 followingInProgressList: action.payload.isFollowing ?
