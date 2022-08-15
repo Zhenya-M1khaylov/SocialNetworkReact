@@ -1,9 +1,9 @@
-import React, {ChangeEvent, MouseEventHandler} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {DialogsPagePropsType} from '../../redux/store';
 import {DialogsContainerType} from './DialogsContainer';
+import { Redirect } from 'react-router-dom';
 
 // export type DialogsPropsType = {
 //     dialogsPage: DialogsPagePropsType
@@ -31,6 +31,9 @@ const Dialogs: React.FC<DialogsContainerType> = (props) => {
     const onSendMessageClickHandler = () => {
         props.onSendMessageClick(newMessageBodyText)
     }
+
+    if (!props.isAuth) return <Redirect to ={'/login'}/>
+
 
     return (
         <div className={s.dialogs}>
