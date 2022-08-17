@@ -2,6 +2,7 @@ import React from 'react';
 import s from './ProfileAvatar.module.css'
 import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileType} from '../../../redux/profile-reducer';
+import {ProfileStatus} from './ProfileStatus'
 
 type ProfileInfoType = {
     profile:ProfileType | null
@@ -20,7 +21,7 @@ const ProfileAvatar = (props: ProfileInfoType) => {
             </div>
             <div className={s.avatarDescription}>
                 <img src={props.profile.photos.large} alt="photoHere"/>
-                description will be hear
+                <ProfileStatus status={'x'}/>
             </div>
         </div>
     );
