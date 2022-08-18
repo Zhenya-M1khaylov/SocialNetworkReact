@@ -1,5 +1,5 @@
 import {PostsPropsType} from './store';
-import {userAPI} from '../api/api';
+import {profileAPI, userAPI} from '../api/api';
 
 export type PostsDataType = {
     id: number
@@ -33,13 +33,15 @@ export type ProfilePageType = {
     posts: Array<PostsDataType>
     newPostsText: string
     profile: null | ProfileType
+    status: string
 }
 
-export type ProfileReducerType = AddPostActionType | UpdateNewTextActionType | setUserProfileActionType
+export type ProfileReducerType = AddPostActionType | UpdateNewTextActionType | setUserProfileActionType | setStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addPost>
 export type UpdateNewTextActionType = ReturnType<typeof onPostChange>
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+export type setStatusActionType = ReturnType<typeof setStatus>
 
 export const addPost = (postMessage: string) => {
     return {
@@ -67,6 +69,28 @@ export const getUserProfile = (userID: string) => (dispatch: any) => {
         })
 }
 
+export const setStatus = (status: string) => {
+    return {
+        type: 'SET-STATUS',
+        status: status
+    } as const
+}
+
+export const getStatus = (userID: string) => (dispatch: any) => {
+    profileAPI.getStatus(userID)
+        .then(response => {
+            dispatch(setStatus(response.data))
+        })
+}
+
+export const updateStatus = (status: string) => (dispatch: any) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
+}
 
 let initialState: ProfilePageType = {
     posts: [
@@ -75,6 +99,7 @@ let initialState: ProfilePageType = {
     ],
     newPostsText: '',
     profile: null,
+    status: ''
 }
 
 export const profileReducer = (state = initialState, action: ProfileReducerType): ProfilePageType => {
@@ -102,6 +127,12 @@ export const profileReducer = (state = initialState, action: ProfileReducerType)
             return {
                 ...state,
                 profile: action.profile
+            }
+        }
+        case 'SET-STATUS': {
+            return {
+                ...state,
+                status: action.status
             }
         }
         default:

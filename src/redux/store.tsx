@@ -23,6 +23,7 @@ export type ProfilePagePropsType = {
     posts: Array<PostsPropsType>
     newPostsText: string
     profile: null | ProfileType
+    status: string
 
 }
 export type RootStatePropsType = {
@@ -51,7 +52,8 @@ const store: StorePropsType = {
                 {id: 2, message: 'How are you? u are fine?', likesCount: 11}
             ],
             newPostsText: '',
-            profile: null
+            profile: null,
+            status: ''
 
         },
         dialogsPage: {
