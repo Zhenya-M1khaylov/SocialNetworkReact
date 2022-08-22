@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {newMessageBodyAC, sendMessageAC} from '../../redux/dialogs-reducer';
+import {sendMessageAC} from '../../redux/dialogs-reducer';
 import {DialogsPagePropsType} from '../../redux/store';
 import Dialogs from './Dialogs';
 import {compose, Dispatch} from 'redux';
@@ -15,12 +15,10 @@ export type mapStateToPropsType = {
 }
 
 export type mapDispatchToPropsType = {
-    onSendMessageClick: (newSendMessageText: string) => void
-    newMessageBody: (body: string) => void
-
+    onSendMessageClick: (newMessageBodyText: string) => void
 }
 
-export type DialogsContainerType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+export type DialogsType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
 const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
@@ -31,11 +29,8 @@ const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        onSendMessageClick: (newSendMessageText: string) => {
-            dispatch(sendMessageAC(newSendMessageText))
-        },
-        newMessageBody: (body: string) => {
-            dispatch(newMessageBodyAC(body))
+        onSendMessageClick: (newMessageBodyText: string) => {
+            dispatch(sendMessageAC(newMessageBodyText))
         }
     }
 }

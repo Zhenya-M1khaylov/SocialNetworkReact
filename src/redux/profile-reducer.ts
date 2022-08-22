@@ -36,23 +36,16 @@ export type ProfilePageType = {
     status: string
 }
 
-export type ProfileReducerType = AddPostActionType | UpdateNewTextActionType | setUserProfileActionType | setStatusActionType
+export type ProfileReducerType = AddPostActionType | setUserProfileActionType | setStatusActionType
 
 export type AddPostActionType = ReturnType<typeof addPost>
-export type UpdateNewTextActionType = ReturnType<typeof onPostChange>
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
 export type setStatusActionType = ReturnType<typeof setStatus>
 
-export const addPost = (postMessage: string) => {
+export const addPost = (newPostText: string) => {
     return {
         type: 'ADD-POST',
-        postMessage: postMessage
-    } as const
-}
-export const onPostChange = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
+        newPostText: newPostText
     } as const
 }
 export const setUserProfile = (profile: ProfileType) => {
@@ -108,19 +101,13 @@ export const profileReducer = (state = initialState, action: ProfileReducerType)
         case 'ADD-POST': {
             const newPost: PostsPropsType = {
                 id: 5,
-                message: action.postMessage,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
                 newPostsText: ''
-            }
-        }
-        case 'UPDATE-NEW-POST-TEXT': {
-            return {
-                ...state,
-                newPostsText: action.newText
             }
         }
         case 'SET-USER-PROFILE': {
